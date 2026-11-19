@@ -1,0 +1,3 @@
+numpy==2.5.5
+# optional, only for python -m lvc.check_retrieval:
+# fastembed==0.9.1
