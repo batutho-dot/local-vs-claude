@@ -78,20 +78,22 @@ def step_scores(tmp):
     runs = [REFERENCE] + sorted(RUNS.glob("*.json"))
     seen = set()
     for p in runs:
+        key = p.relative_to(ROOT).as_posix()
+        exp = KNOWN["scores"].get(key)
+        check(exp is not None, f"{key} not in verify_known_good.json")
         run = json.loads(p.read_text(encoding="utf-8"))
-        exp = KNOWN["scores"].get(run["model"])
-        check(exp is not None, f"{p.name}: model {run['model']} not in verify_known_good.json")
         s = summarise(run, questions, chunk_text)
         got = {"found": s["found"], "right": s["right"], "declined": s["declined"], "wrong": s["wrong"]}
-        check(got == exp, f"{run['model']}: scores {got}, expected {exp}")
-        seen.add(run["model"])
-    check(seen == set(KNOWN["scores"]), f"saved runs {sorted(seen)} differ from known-good {sorted(KNOWN['scores'])}")
+        check(got == exp, f"{key}: scores {got}, expected {exp}")
+        seen.add(key)
+    check(seen == set(KNOWN["scores"]), f"run files missing: {sorted(set(KNOWN['scores']) - seen)}")
     buf = io.StringIO()
     with redirect_stdout(buf):
         from lvc import report
 
         report.main()
-    check(buf.getvalue().count("| local |") == 3, "report table does not show 3 local rows")
+    models = {json.loads(p.read_text(encoding="utf-8"))["model"] for p in runs}
+    check(all(f"| {m} |" in buf.getvalue() for m in models), "report table is missing a model row")
     return f"{len(runs)} saved runs score as known-good; report prints"
 
 
@@ -99,6 +101,7 @@ class FakeOllama(BaseHTTPRequestHandler):
     """Stand-in for the Ollama API: declines every question, reports fixed memory."""
 
     seen_system = []
+    loaded = False
 
     def log_message(self, *a):
         pass
@@ -117,14 +120,19 @@ class FakeOllama(BaseHTTPRequestHandler):
         elif self.path == "/api/version":
             self.reply({"version": "fake"})
         elif self.path == "/api/ps":
-            self.reply({"models": [{"name": "fake:1b", "model": "fake:1b", "size": 2_000_000_000, "size_vram": 2_000_000_000}]})
+            self.reply({"models": [{"name": "fake:1b", "model": "fake:1b", "size": 2_000_000_000,
+                                    "size_vram": 2_000_000_000}] if FakeOllama.loaded else []})
 
     def do_POST(self):
         body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
         if self.path == "/api/show":
             self.reply({"details": {"parameter_size": "1B", "quantization_level": "Q4_K_M", "family": "fake"},
                         "capabilities": ["completion", "thinking"]})
+        elif self.path == "/api/generate":  # keep_alive 0: unload
+            FakeOllama.loaded = False
+            self.reply({"done": True})
         elif self.path == "/api/chat":
+            FakeOllama.loaded = True
             FakeOllama.seen_system.append((body["messages"][0]["content"], body.get("think"), body["options"]))
             self.reply({"message": {"content": "NOT IN SOURCES"}, "prompt_eval_count": 10, "eval_count": 3, "done_reason": "stop"})
 
@@ -136,15 +144,17 @@ def step_generate_offline(tmp):
     chunks, questions = load()
     server = HTTPServer(("127.0.0.1", 0), FakeOllama)
     threading.Thread(target=server.serve_forever, daemon=True).start()
-    old = generate.OLLAMA, generate.RUNS
+    old = generate.OLLAMA, generate.RUNS, generate.free_ram_bytes
     generate.OLLAMA, generate.RUNS = f"http://127.0.0.1:{server.server_port}", tmp / "runs"
+    generate.free_ram_bytes = lambda: 10**12  # the stand-in loads nothing, so real RAM does not matter
     try:
         with redirect_stdout(io.StringIO()):
             generate.main("fake:1b")
     finally:
-        generate.OLLAMA, generate.RUNS = old
+        generate.OLLAMA, generate.RUNS, generate.free_ram_bytes = old
         server.shutdown()
-    run = json.loads((tmp / "runs" / "fake_1b.json").read_text(encoding="utf-8"))
+    check(not FakeOllama.loaded, "model not unloaded after the run")
+    run = json.loads((tmp / "runs" / "fake_1b_r1.json").read_text(encoding="utf-8"))
     check(len(run["rows"]) == 30, f"{len(run['rows'])} rows, expected 30")
     check(run["memory_bytes"] == 2_000_000_000 and run["quantization"] == "Q4_K_M", "memory or model info not recorded")
     system, think, options = FakeOllama.seen_system[-1]
@@ -169,9 +179,9 @@ def step_full_local(tmp):
         raise Fail(f"Ollama not reachable on 127.0.0.1:11434 ({e})")
     finally:
         generate.RUNS = old
-    run = json.loads((tmp / "runs" / (model.replace(":", "_") + ".json")).read_text(encoding="utf-8"))
+    run = json.loads((tmp / "runs" / (model.replace(":", "_") + "_r1.json")).read_text(encoding="utf-8"))
     s = summarise(run, questions, {c.id: c.text for c in chunks})
-    exp = KNOWN["scores"][model]
+    exp = KNOWN["scores"]["runs/" + model.replace(":", "_") + "_r1.json"]
     got = {"found": s["found"], "right": s["right"], "declined": s["declined"], "wrong": s["wrong"]}
     check(got == exp, f"{model} rerun scored {got}, saved run {exp}")
     return f"{model} rerun on real Ollama matches the saved scores ({s['right']}/20, {s['declined']}/10, {s['total_s']:.0f} s)"
@@ -201,7 +211,7 @@ def main():
             except Fail as e:
                 print(f"verify: FAIL at {name}: {e}")
                 sys.exit(1)
-            except Exception as e:  # an unexpected crash is a failure of that step
+            except (Exception, SystemExit) as e:  # an unexpected crash or exit fails that step
                 print(f"verify: FAIL at {name}: {type(e).__name__}: {e}")
                 sys.exit(1)
     print("verify: PASS")

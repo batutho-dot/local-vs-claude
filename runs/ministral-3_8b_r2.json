@@ -1,0 +1,483 @@
+{
+  "model": "ministral-3:8b",
+  "tag": "r2",
+  "parameter_size": "8.9B",
+  "quantization": "Q4_K_M",
+  "family": "mistral3",
+  "file_bytes": 6022236616,
+  "digest": "1922accd5827ebe6829e536369195db25eaf664528dc66206d646ea3bb386b71",
+  "capabilities": [
+    "completion",
+    "vision",
+    "tools"
+  ],
+  "free_ram_before_bytes": 9501978624,
+  "ollama_version": "0.40.16",
+  "options": {
+    "num_ctx": 8192,
+    "temperature": 0.0,
+    "num_predict": 1024,
+    "think": null
+  },
+  "machine": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD"
+  },
+  "time_utc": "2026-11-19T22:05:01+00:00",
+  "warmup_seconds": 19.15,
+  "memory_bytes": 6301826414,
+  "memory_vram_bytes": 5887827639,
+  "total_seconds": 195.19,
+  "rows": [
+    {
+      "id": "q01",
+      "retrieved": [
+        "taxonomy#0013",
+        "esrs#0058",
+        "csrd#0063",
+        "taxonomy#0058",
+        "taxonomy#0034"
+      ],
+      "answer": "The environmental objectives of the EU Taxonomy, as outlined in the passage, are:\n\n1. Climate change mitigation\n2. Climate change adaptation\n3. The sustainable use and protection of water and marine resources\n4. The transition to a circular economy\n5. Pollution prevention and control\n6. The protection and restoration of biodiversity and ecosystems\n\n[4]",
+      "seconds": 7.77,
+      "input_tokens": 1399,
+      "output_tokens": 74,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q02",
+      "retrieved": [
+        "taxonomy#0080",
+        "taxonomy#0028",
+        "esrs#0596",
+        "csrd#0062",
+        "taxonomy#0079"
+      ],
+      "answer": "The Taxonomy's minimum safeguards refer to the **OECD Guidelines for Multinational Enterprises** and the **UN Guiding Principles on Business and Human Rights**, including the **International Labour Organisation’s (ILO) Declaration on Fundamental Principles and Rights at Work** and the **International Bill of Human Rights** [1, 2].",
+      "seconds": 7.36,
+      "input_tokens": 1445,
+      "output_tokens": 69,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q03",
+      "retrieved": [
+        "taxonomy#0077",
+        "taxonomy#0058",
+        "taxonomy#0063",
+        "taxonomy#0061",
+        "taxonomy#0079"
+      ],
+      "answer": "An economic activity is considered to do **significant harm to climate change mitigation** when it leads to **significant greenhouse gas emissions** throughout its life cycle, as defined in **Article 17(a)** [1]. This includes activities that contribute to the stabilisation of greenhouse gas concentrations in the atmosphere in a way that prevents dangerous interference with the climate system, as outlined in **Article 10** [2].",
+      "seconds": 7.55,
+      "input_tokens": 1361,
+      "output_tokens": 86,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q04",
+      "retrieved": [
+        "csrd#0050",
+        "csrd#0051",
+        "csrd#0038",
+        "csrd#0069",
+        "esrs#0111"
+      ],
+      "answer": "Under the CSRD (as referenced in the passages), a company's sustainability reporting must cover **two kinds of information**:\n\n1. **Information about the impacts of the company’s activities on environmental, social, and employee matters, respect for human rights, anti-corruption, and bribery** (external impacts).\n2. **Information on how sustainability matters affect the company itself** (internal impacts).\n\nThis is referred to as the **double materiality principle** [3].",
+      "seconds": 8.11,
+      "input_tokens": 1409,
+      "output_tokens": 95,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q05",
+      "retrieved": [
+        "csrd#0244",
+        "csrd#0018",
+        "csrd#0246",
+        "csrd#0243",
+        "csrd#0247"
+      ],
+      "answer": "Large public-interest entities with more than 500 employees must report under the CSRD from the financial year starting on or after **1 January 2024** [1, 4, 5].",
+      "seconds": 8.72,
+      "input_tokens": 1752,
+      "output_tokens": 45,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q06",
+      "retrieved": [
+        "csrd#0087",
+        "csrd#0086",
+        "csrd#0214",
+        "csrd#0098",
+        "csrd#0076"
+      ],
+      "answer": "The Commission must adopt standards for reasonable assurance of sustainability reporting by **1 October 2028** [1, 2, 3].",
+      "seconds": 5.61,
+      "input_tokens": 1342,
+      "output_tokens": 31,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q07",
+      "retrieved": [
+        "csrd#0077",
+        "csrd#0078",
+        "esrs#0057",
+        "esrs#0111",
+        "esrs#0056"
+      ],
+      "answer": "The management report, including the sustainability statement, must be prepared in the **electronic reporting format specified in Article 3 of Commission Delegated Regulation (EU) 2019/815**, and it must be **machine-readable** [1, 2, 3].",
+      "seconds": 7.1,
+      "input_tokens": 1446,
+      "output_tokens": 60,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q08",
+      "retrieved": [
+        "esrs#0044",
+        "esrs#0045",
+        "esrs#0043",
+        "esrs#0113",
+        "esrs#0709"
+      ],
+      "answer": "The medium-term time horizon in the ESRS is defined as the period from the end of the short-term reporting period (as defined in the financial statements) up to **5 years** [3]. [1] also reiterates this definition.",
+      "seconds": 6.5,
+      "input_tokens": 1413,
+      "output_tokens": 50,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q09",
+      "retrieved": [
+        "esrs#0020",
+        "esrs#0087",
+        "esrs#0019",
+        "esrs#0024",
+        "esrs#0074"
+      ],
+      "answer": "A company must always disclose the information required by **ESRS 2 General Disclosures** (all Disclosure Requirements and data points) and the Disclosure Requirements related to **IRO-1 (Description of the process to identify and assess material impacts, risks, and opportunities)** as listed in ESRS 2 Appendix C, regardless of the materiality assessment outcome [1, 3].",
+      "seconds": 7.9,
+      "input_tokens": 1460,
+      "output_tokens": 80,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q10",
+      "retrieved": [
+        "esrs#0207",
+        "esrs#0206",
+        "esrs#0184",
+        "esrs#0185",
+        "esrs#0209"
+      ],
+      "answer": "The disclosure requirement asking for a company's **Scope 1, 2, and 3 greenhouse gas (GHG) emissions** is **ESRS E1-6** (Gross Scopes 1, 2, 3 and Total GHG emissions), as explicitly referenced in passages **[1]**, **[2]**, **[3]**, and **[4]**.",
+      "seconds": 8.46,
+      "input_tokens": 1561,
+      "output_tokens": 78,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q11",
+      "retrieved": [
+        "taxonomy#0077",
+        "esrs#0238",
+        "taxonomy#0076",
+        "esrs#0194",
+        "taxonomy#0054"
+      ],
+      "answer": "An economic activity counts as an **enabling activity** under the EU Taxonomy if it **directly enables other activities to make a substantial contribution to one or more environmental objectives** (e.g., climate change mitigation, biodiversity protection) while meeting two conditions: **(a)** it does not lead to a lock-in of assets that undermine long-term environmental goals, considering their economic lifetime; and **(b)** it has a **substantial positive environmental impact**, based on life-cycle considerations [1].",
+      "seconds": 8.31,
+      "input_tokens": 1426,
+      "output_tokens": 100,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q12",
+      "retrieved": [
+        "taxonomy#0056",
+        "esrs#0224",
+        "esrs#0103",
+        "esrs#0058",
+        "taxonomy#0057"
+      ],
+      "answer": "Non-financial undertakings must disclose the following three figures under **Article 8** of the Taxonomy Regulation:\n\n1. The **proportion of turnover** derived from products or services associated with environmentally sustainable economic activities [5].\n2. The **proportion of capital expenditure** related to sustainable activities [5].\n3. The **proportion of operating expenditure** linked to sustainable assets or processes [5].",
+      "seconds": 8.48,
+      "input_tokens": 1526,
+      "output_tokens": 85,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q13",
+      "retrieved": [
+        "csrd#0021",
+        "csrd#0174",
+        "csrd#0173",
+        "taxonomy#0056",
+        "csrd#0030"
+      ],
+      "answer": "A third-country undertaking is subject to **CSRD reporting** if it generates a net turnover of **more than EUR 150 million in the EU** for each of the last two consecutive financial years [1, 2, 3].",
+      "seconds": 6.81,
+      "input_tokens": 1444,
+      "output_tokens": 51,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q14",
+      "retrieved": [
+        "csrd#0085",
+        "csrd#0221",
+        "csrd#0096",
+        "csrd#0094",
+        "csrd#0169"
+      ],
+      "answer": "The CSRD initially requires a **limited assurance engagement** by the statutory auditor or audit firm to express an opinion on the compliance of sustainability reporting with Union requirements [1].",
+      "seconds": 5.58,
+      "input_tokens": 1303,
+      "output_tokens": 35,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q15",
+      "retrieved": [
+        "csrd#0076",
+        "csrd#0158",
+        "csrd#0098",
+        "csrd#0214",
+        "esrs#0001"
+      ],
+      "answer": "The Commission had to adopt the first set of sustainability reporting standards by **30 June 2023** [1, 5].",
+      "seconds": 6.52,
+      "input_tokens": 1523,
+      "output_tokens": 30,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q16",
+      "retrieved": [
+        "csrd#0076",
+        "csrd#0151",
+        "csrd#0159",
+        "csrd#0013",
+        "csrd#0213"
+      ],
+      "answer": "The Commission must review the sustainability reporting standards **at least every three years** after their date of application [1, 3].",
+      "seconds": 6.15,
+      "input_tokens": 1511,
+      "output_tokens": 27,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q17",
+      "retrieved": [
+        "esrs#0001",
+        "csrd#0054",
+        "csrd#0055",
+        "csrd#0056",
+        "csrd#0052"
+      ],
+      "answer": "The European Financial Reporting Advisory Group (EFRAG) provides the Commission with technical advice on sustainability reporting standards [1, 2, 3, 4].",
+      "seconds": 6.37,
+      "input_tokens": 1470,
+      "output_tokens": 34,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q18",
+      "retrieved": [
+        "esrs#0044",
+        "esrs#0045",
+        "esrs#0043",
+        "esrs#0113",
+        "esrs#0709"
+      ],
+      "answer": "The long-term time horizon in the ESRS is defined as **more than 5 years** [1, 3].",
+      "seconds": 1.27,
+      "input_tokens": 1413,
+      "output_tokens": 26,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q19",
+      "retrieved": [
+        "esrs#0185",
+        "esrs#0191",
+        "esrs#0184",
+        "esrs#0220",
+        "esrs#0188"
+      ],
+      "answer": "The disclosure requirement covering a company's transition plan for climate change mitigation is **Disclosure Requirement E1-1 – Transition plan for climate change mitigation** [2, 4].",
+      "seconds": 6.81,
+      "input_tokens": 1508,
+      "output_tokens": 38,
+      "done_reason": "stop"
+    },
+    {
+      "id": "q20",
+      "retrieved": [
+        "esrs#0254",
+        "esrs#0044",
+        "esrs#0220",
+        "esrs#0185",
+        "esrs#0785"
+      ],
+      "answer": "The Global Warming Potential (GWP) values used for CO2-equivalent emissions in ESRS E1 must be based on a **100-year time horizon** as specified in the IPCC [1].",
+      "seconds": 7.2,
+      "input_tokens": 1532,
+      "output_tokens": 45,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u01",
+      "retrieved": [
+        "csrd#0081",
+        "csrd#0107",
+        "csrd#0164",
+        "csrd#0079",
+        "csrd#0108"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 5.53,
+      "input_tokens": 1489,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u02",
+      "retrieved": [
+        "esrs#0185",
+        "esrs#0220",
+        "esrs#0814",
+        "esrs#0785",
+        "esrs#0196"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 5.7,
+      "input_tokens": 1533,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u03",
+      "retrieved": [
+        "esrs#0257",
+        "esrs#0000",
+        "esrs#0286",
+        "esrs#0277",
+        "esrs#0278"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 6.12,
+      "input_tokens": 1591,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u04",
+      "retrieved": [
+        "esrs#0535",
+        "esrs#0536",
+        "esrs#0534",
+        "esrs#0537",
+        "esrs#0555"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 4.97,
+      "input_tokens": 1392,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u05",
+      "retrieved": [
+        "csrd#0079",
+        "csrd#0014",
+        "esrs#0765",
+        "esrs#0737",
+        "esrs#0001"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 6.61,
+      "input_tokens": 1660,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u06",
+      "retrieved": [
+        "esrs#0111",
+        "taxonomy#0018",
+        "esrs#0009",
+        "taxonomy#0017",
+        "esrs#0167"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 4.89,
+      "input_tokens": 1374,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u07",
+      "retrieved": [
+        "taxonomy#0013",
+        "taxonomy#0012",
+        "taxonomy#0015",
+        "taxonomy#0027",
+        "taxonomy#0014"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 4.66,
+      "input_tokens": 1328,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u08",
+      "retrieved": [
+        "esrs#0841",
+        "esrs#0207",
+        "esrs#0265",
+        "esrs#0000",
+        "csrd#0065"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 6.07,
+      "input_tokens": 1580,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u09",
+      "retrieved": [
+        "taxonomy#0017",
+        "csrd#0020",
+        "taxonomy#0018",
+        "csrd#0019",
+        "csrd#0243"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 5.22,
+      "input_tokens": 1434,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    },
+    {
+      "id": "u10",
+      "retrieved": [
+        "esrs#0260",
+        "esrs#0258",
+        "esrs#0751",
+        "esrs#0259",
+        "esrs#0814"
+      ],
+      "answer": "NOT IN SOURCES",
+      "seconds": 6.84,
+      "input_tokens": 1679,
+      "output_tokens": 6,
+      "done_reason": "stop"
+    }
+  ]
+}

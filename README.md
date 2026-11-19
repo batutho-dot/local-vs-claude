@@ -2,16 +2,16 @@
 
 **Question:** organisations with confidential documents (health services, public bodies, companies under NDA) often cannot send text to a cloud API. If they run an open model on their own machine instead, how much worse are the answers? I take the 30-question test from [rag-eval](https://github.com/batutho-dot/rag-eval), keep the search step fixed, and swap only the model that writes the answer: three open models running locally, with Claude Haiku 5.5 as the reference.
 
-**Answer (30 questions, one run per model, 2026-11-19, on the PC described below):**
+**Answer (30 questions, 3 runs per model, 2026-11-19, on the PC described below).** Each cell is the mean over the 3 runs, with the lowest to highest run in brackets where they differ:
 
-| Model | Runs on | Size, quantization | Right passage found | Right answer given | Unanswerable declined | Median s per answer | Total s (30 questions) | Memory used |
-|---|---|---|---|---|---|---|---|---|
-| Claude Haiku 5.5 (reference) | Anthropic API | not published | 17 / 20 | 20 / 20 | 10 / 10 | 0.9 | 32 | n/a (cloud) |
-| `llama3.2:3b` (Meta) | this PC | 3.2B, Q4_K_M, 2.0 GB file | 17 / 20 | **13 / 20** | 10 / 10 | 3.0 | 91 | 3.1 GB, all on GPU |
-| `qwen3.5:4b` (Alibaba) | this PC | 4.2B, Q4_K_M, 3.3 GB file | 17 / 20 | **20 / 20** | 10 / 10 | 10.6 | 327 | 3.3 GB, all on GPU |
-| `ministral-3:8b` (Mistral AI) | this PC | 8.9B, Q4_K_M, 6.0 GB file | 17 / 20 | **20 / 20** | 10 / 10 | 13.0 | 400 | 6.3 GB, 5.9 GB on GPU |
+| Model | Runs on | Size, quantization | Right passage found | Right answer given | Unanswerable declined | Median s per answer | Memory used |
+|---|---|---|---|---|---|---|---|
+| Claude Haiku 5.5 (reference) | Anthropic API | not published | 17 / 20 | 20 / 20 | 10 / 10 | 0.9 | n/a (cloud) |
+| `llama3.2:3b` (Meta) | this PC | 3.2B, Q4_K_M, 2.0 GB file | 17 / 20 | **13 / 20** | 10 / 10 | 3.0 (2.9 to 3.0) | 3.1 GB, all on GPU |
+| `qwen3.5:4b` (Alibaba) | this PC | 4.2B, Q4_K_M, 3.3 GB file | 17 / 20 | **20 / 20** | 10 / 10 | 5.1 (2.2 to 10.6) | 3.3 GB (3.3 to 3.4), all on GPU |
+| `ministral-3:8b` (Mistral AI) | this PC | 8.9B, Q4_K_M, 6.0 GB file | 17 / 20 | **20 / 20** | 10 / 10 | 8.7 (6.6 to 13.0) | 6.3 GB, 5.9 GB on GPU |
 
-On this test, a 4-billion-parameter model on a mid-range gaming PC matched Claude Haiku 5.5 on both answer scores, at about 10 times the answer time. The 3-billion model declined every unanswerable question but got 7 of the 20 answerable ones wrong, mostly by replying with passage numbers and no answer (see What failed). Scores come from the rule-based script only. No answer was graded by hand or by a judge model.
+The scores did not move between runs: every model got the same score in all 3. On this test, a 4-billion-parameter model on a mid-range gaming PC matched Claude Haiku 5.5 on both answer scores, at 2 to 12 times the answer time. The 3-billion model declined every unanswerable question but got the same 7 of the 20 answerable ones wrong in every run, mostly by replying with passage numbers and no answer (see What failed). Times varied far more than scores (see Time). Scores come from the rule-based script only. No answer was graded by hand or by a judge model.
 
 ## Terms
 
@@ -49,15 +49,20 @@ python run.py download        # the three EU texts from EUR-Lex into data/ (abou
 python run.py                 # print the table from the saved runs
 ```
 
-New runs are free and local, but download about 11 GB of models:
+New local runs are free, but download about 11 GB of models:
 
 ```bash
 ollama pull llama3.2:3b
 ollama pull qwen3.5:4b
 ollama pull ministral-3:8b
-python run.py generate qwen3.5:4b     # or any other Ollama model name
+python run.py generate qwen3.5:4b r2  # one model, one run tagged r2 (any Ollama model name)
+python run.py repeat r2 r3            # every model once per tag, one at a time
 python run.py                         # the table, with every run in runs/
 ```
+
+Before loading a model the run checks that no other model is loaded and that free RAM is at least the model's memory plus 3 GB; if not, `repeat` waits and rechecks every 3 minutes. The model is unloaded after each run.
+
+`python run.py claude r4` repeats the Claude Haiku 5.5 run on the same passages (about 0.009 USD per run; needs `ANTHROPIC_API_KEY`; stops before the total Haiku spend in `runs/` passes 0.50 USD).
 
 `python -m lvc.check_retrieval` reruns the hybrid search and checks the passages match the saved Claude run (needs `pip install fastembed==0.9.1`; result on 2026-11-19: 30 / 30 match).
 
@@ -72,9 +77,10 @@ Every question gets the same five passages Claude got. Only the model that write
 | Passages | the 5 chunk ids saved in `reference/haiku_hybrid.json` (rag-eval's Claude run with hybrid search) |
 | Prompt | rag-eval's system and user prompt, word for word: answer only from the numbered passages, or reply `NOT IN SOURCES` |
 | Model settings | temperature 0 (always the most likely next word), context window 8,192 tokens, at most 1,024 answer tokens; `qwen3.5` has a reasoning mode, switched off (`think: false`) to match Claude at low effort |
-| Warm-up | one dummy question first, so loading the model is not counted as answer time (load took 7.6 s, 22.7 s and 22.2 s) |
+| Warm-up | one dummy question first, so loading the model is not counted as answer time (load took 4.3 to 9.4 s for llama, 6.4 to 22.7 s for qwen, 18.5 to 22.2 s for ministral) |
 | Time | wall-clock seconds per answer, measured in Python around the call to the local Ollama server |
 | Memory | what Ollama reports for the loaded model (`/api/ps`): total, and the part in GPU memory. 1 GB = 10^9 bytes |
+| Runs | 3 per model. Claude's first run is rag-eval's saved run; its runs 2 and 3 were made here with the same model, settings and prompt (`lvc/claude.py`) |
 | Scoring | rag-eval's own rule-based scorer (`rageval/report.py`), unchanged |
 
 Scores as in rag-eval: *right passage found* (one of the 5 passages holds an accepted evidence passage), *right answer given* (every required term present, no decline), *unanswerable declined* (the reply is `NOT IN SOURCES` for the 10 questions the texts cannot answer).
@@ -87,6 +93,8 @@ Scores as in rag-eval: *right passage found* (one of the 5 passages holds an acc
 
 ### Where the answers went wrong
 
+The same in all 3 runs of each model:
+
 | Model | Answerable answered wrong | Of those, falsely declined | Unanswerable answered anyway |
 |---|---|---|---|
 | Claude Haiku 5.5 | none | none | none |
@@ -94,35 +102,46 @@ Scores as in rag-eval: *right passage found* (one of the 5 passages holds an acc
 | `qwen3.5:4b` | none | none | none |
 | `ministral-3:8b` | none | none | none |
 
+### Do repeat runs give the same answers?
+
+| Model | Answers word-for-word identical in all 3 runs |
+|---|---|
+| Claude Haiku 5.5 (default settings) | 11 / 30 |
+| `llama3.2:3b` (temperature 0) | 30 / 30 |
+| `qwen3.5:4b` (temperature 0) | 25 / 30 |
+| `ministral-3:8b` (temperature 0) | 30 / 30 |
+
+Claude's wording changed from run to run, but its scores did not. Temperature 0 made two of the local models fully repeatable.
+
 ### Time
 
-| Model | Median s, answerable | Median s, unanswerable | Median answer length (tokens) |
-|---|---|---|---|
-| Claude Haiku 5.5 | 1.2 | 0.7 | not compared (different tokenizer) |
-| `llama3.2:3b` | 3.0 | 3.0 | 26 |
-| `qwen3.5:4b` | 12.5 | 7.0 | 52 |
-| `ministral-3:8b` | 15.1 | 9.9 | 50.5 |
+| Model | Median s per answer, runs 1 / 2 / 3 | Total s for 30 answers, runs 1 / 2 / 3 |
+|---|---|---|
+| Claude Haiku 5.5 | 0.9 / 0.9 / 0.9 | 32 / 30 / 31 |
+| `llama3.2:3b` | 3.0 / 3.0 / 2.9 | 91 / 91 / 87 |
+| `qwen3.5:4b` | 10.6 / 2.6 / 2.2 | 327 / 86 / 70 |
+| `ministral-3:8b` | 13.0 / 6.6 / 6.6 | 400 / 195 / 194 |
 
-A three-word `NOT IN SOURCES` still took 7 to 10 seconds on the two larger models, so most of their time likely goes into reading the roughly 1,700-token prompt. I did not time reading and writing separately. Claude's times are from rag-eval's run the same day, over the internet from the same PC, so they include network time.
+The first runs of the two larger models were 2 to 4 times slower than runs 2 and 3, with the same Ollama version, backend (Vulkan) and settings. During those first runs other work was running on the PC, and the `ministral-3:8b` download was still in progress during `qwen3.5:4b`'s first run. I did not measure the load, so the cause is not established; the range in the table is the honest answer. Claude's times are over the internet from the same PC, so they include network time.
 
 ## What failed
 
 - **`llama3.2:3b` often answered with passage numbers only.** For q05, q10, q19 and q20 the whole reply was a citation such as `[1]` or `[2] [17] [1] (ii)`, with no answer. The smallest model kept the bracketed passage numbers the prompt asks for and dropped the answer. For q12 and q14 it declined although the passages hold the answer. For q04 it copied long stretches of passage text without stating the two kinds of information asked for. It never invented an answer to an unanswerable question.
-- **The larger local models are slow on this GPU.** `ministral-3:8b` needed 6.3 GB, of which 0.4 GB did not fit in GPU memory and ran from RAM. Ollama's faster AMD path (ROCm) refused the installed driver as too old, so all runs used Vulkan. A newer driver, or an NVIDIA card, would likely be faster. I did not test that.
+- **The larger local models are slow on this GPU, and their speed depends on what else the PC is doing.** `ministral-3:8b` needed 6.3 GB, of which 0.4 GB did not fit in GPU memory and ran from RAM. Its median time per answer ranged from 6.6 to 13.0 s over three runs. Ollama's faster AMD path (ROCm) refused the installed driver as too old, so all runs used Vulkan. A newer driver, or an NVIDIA card, would likely be faster. I did not test that.
 - **`qwen3.5:4b` and `ministral-3:8b` fail nothing by the script's rule, but the rule is lenient with long answers.** Their answers are longer than Claude's, and the script only checks that the required terms appear, so a long answer can contain the term and still say something wrong around it. I did not grade these by hand or with a judge.
 
 ## Limits
 
 - 30 questions. One answerable question is 5 percentage points, one unanswerable 10. With 20 / 20 for three models, this test cannot tell them apart. A harder test could.
-- Rule-based scores only. rag-eval's Claude judge (Sonnet 5.5) was not run on the local answers, so no API money was spent.
-- One run per model, at temperature 0. Claude's reference run used its default settings.
+- Rule-based scores only. rag-eval's Claude judge (Sonnet 5.5) was not run on the local answers. The only spend here is Claude Haiku runs 2 and 3: 0.0173 USD.
+- 3 runs per model. Local models at temperature 0; Claude at its default settings. 3 runs show the scores are stable on this test, not how much they would vary on a harder one.
 - Retrieval is fixed to the passages found for Claude. A real local setup would also run the search locally (the embedding model here is small and does run locally).
 - Times and memory hold for this PC, this driver and Ollama 0.40.16 only.
 - Claude Haiku 5.5's size and quantization are not published, so the table cannot compare model size across cloud and local rows.
 
 ## Source and credit
 
-Test set, prompts, chunking, hybrid search and scorer: pinned copies from rag-eval (MIT, same author), commit `e2cfdad`, in `pipeline/` and `rageval/`. Only `rageval/config.py` and `rageval/report.py` of rag-eval's own code are used. Its paid generate and judge steps are left out.
+Test set, prompts, chunking, hybrid search and scorer: pinned copies from rag-eval (MIT, same author), commit `e2cfdad`, in `pipeline/` and `rageval/`. Only `rageval/config.py` and `rageval/report.py` of rag-eval's own code are used. Its judge step is left out; `lvc/claude.py` repeats its Haiku answer step with the same settings.
 
 EU legal texts: © European Union, https://eur-lex.europa.eu, re-used under the Commission's reuse policy (Decision 2011/833/EU), see https://eur-lex.europa.eu/content/legal-notice/legal-notice.html. `python run.py download` fetches them; they are not stored in this repo. Not legal advice.
 

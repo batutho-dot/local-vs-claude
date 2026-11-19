@@ -1,5 +1,6 @@
 {
   "model": "qwen3.5:4b",
+  "tag": "r3",
   "parameter_size": "4.2B",
   "quantization": "Q4_K_M",
   "family": "qwen35",
@@ -11,6 +12,7 @@
     "tools",
     "thinking"
   ],
+  "free_ram_before_bytes": 8955506688,
   "ollama_version": "0.40.16",
   "options": {
     "num_ctx": 8192,
@@ -22,11 +24,11 @@
     "os": "Windows-11-10.0.26300-SP0",
     "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD"
   },
-  "time_utc": "2026-11-19T02:25:41+00:00",
-  "warmup_seconds": 22.7,
-  "memory_bytes": 3284150516,
-  "memory_vram_bytes": 3284150516,
-  "total_seconds": 327.3,
+  "time_utc": "2026-11-19T21:58:25+00:00",
+  "warmup_seconds": 6.41,
+  "memory_bytes": 3375397600,
+  "memory_vram_bytes": 3375397600,
+  "total_seconds": 69.92,
   "rows": [
     {
       "id": "q01",
@@ -38,7 +40,7 @@
         "taxonomy#0034"
       ],
       "answer": "The environmental objectives of the EU Taxonomy are climate change mitigation, climate change adaptation, the sustainable use and protection of water and marine resources, the transition to a circular economy, pollution prevention and control, and the protection and restoration of biodiversity and ecosystems [4].",
-      "seconds": 12.68,
+      "seconds": 2.41,
       "input_tokens": 1393,
       "output_tokens": 53,
       "done_reason": "stop"
@@ -53,7 +55,7 @@
         "taxonomy#0079"
       ],
       "answer": "The Taxonomy's minimum safeguards refer to the OECD Guidelines for Multinational Enterprises and the UN Guiding Principles on Business and Human Rights [1]. These procedures also require adherence to the principles and rights set out in the eight fundamental conventions of the International Labour Organisation and the International Bill of Human Rights [1], which are further contextualized by their alignment with the EU Charter of Fundamental Rights [2].",
-      "seconds": 14.77,
+      "seconds": 2.88,
       "input_tokens": 1430,
       "output_tokens": 81,
       "done_reason": "stop"
@@ -68,7 +70,7 @@
         "taxonomy#0079"
       ],
       "answer": "An economic activity is considered to significantly harm climate change mitigation if it leads to significant greenhouse gas emissions, taking into account the life cycle of the products and services provided [1]. This assessment must consider evidence from existing life-cycle assessments as specified in Article 17 [1].",
-      "seconds": 11.26,
+      "seconds": 2.43,
       "input_tokens": 1359,
       "output_tokens": 56,
       "done_reason": "stop"
@@ -83,7 +85,7 @@
         "esrs#0111"
       ],
       "answer": "Under the double materiality perspective, companies must report on both the impacts of their activities on people and the environment, and on how sustainability matters affect the undertaking itself [3].",
-      "seconds": 8.62,
+      "seconds": 2.19,
       "input_tokens": 1404,
       "output_tokens": 36,
       "done_reason": "stop"
@@ -98,7 +100,7 @@
         "csrd#0247"
       ],
       "answer": "Based on the provided passages, large public-interest entities with more than 500 employees must report sustainability information for financial years starting on or after **1 January 2024**. This requirement applies to issuers that are large undertakings exceeding the average number of 500 employees during their balance sheet dates [3] and [4].",
-      "seconds": 14.78,
+      "seconds": 3.25,
       "input_tokens": 1754,
       "output_tokens": 73,
       "done_reason": "stop"
@@ -113,7 +115,7 @@
         "csrd#0076"
       ],
       "answer": "The Commission must adopt standards for reasonable assurance of sustainability reporting no later than 1 October 2028. [1][2][3]",
-      "seconds": 7.94,
+      "seconds": 2.07,
       "input_tokens": 1334,
       "output_tokens": 31,
       "done_reason": "stop"
@@ -128,7 +130,7 @@
         "esrs#0056"
       ],
       "answer": "The management report must be prepared in the electronic reporting format specified in Article 3 of Commission Delegated Regulation (EU) 2019/815 [1][2].",
-      "seconds": 9.41,
+      "seconds": 2.29,
       "input_tokens": 1445,
       "output_tokens": 39,
       "done_reason": "stop"
@@ -143,7 +145,7 @@
         "esrs#0709"
       ],
       "answer": "The medium-term time horizon is defined as the period from the end of the short-term reporting period up to 5 years [1], [3].",
-      "seconds": 8.21,
+      "seconds": 2.16,
       "input_tokens": 1412,
       "output_tokens": 31,
       "done_reason": "stop"
@@ -158,7 +160,7 @@
         "esrs#0074"
       ],
       "answer": "Based on the provided passages, a company must always disclose information required by ESRS 2 General Disclosures (including all Disclosure Requirements and data points) and the Disclosure Requirements in topical ESRS related to IRO-1 regarding the process to identify and assess material impacts, risks, and opportunities [1][29]. Additionally, if a sustainability matter is deemed material, the company must disclose information according to the specific Disclosure Requirements for that matter in the corresponding topical and sector-specific ESRS [1].",
-      "seconds": 17.34,
+      "seconds": 3.18,
       "input_tokens": 1439,
       "output_tokens": 101,
       "done_reason": "stop"
@@ -172,10 +174,10 @@
         "esrs#0185",
         "esrs#0209"
       ],
-      "answer": "The ESRS disclosure requirement that asks for a company's Scope 1, 2, and 3 greenhouse gas emissions is Disclosure Requirement E1-6. This is explicitly stated in the text which lists \"Disclosure Requirement E1-6 – Gross Scopes 1, 2, 3 and Total GHG emissions\" [3] and confirms that paragraph 44 requires the undertaking to disclose these specific emission types [2].",
-      "seconds": 16.11,
+      "answer": "The ESRS disclosure requirement that asks for a company's Scope 1, 2, and 3 greenhouse gas emissions is Disclosure Requirement E1-6. This is explicitly stated in the table of contents found in passages [3] and [4], which lists \"Disclosure Requirement E1-6 – Gross Scopes 1, 2, 3 and Total GHG emissions.\" Additionally, paragraph 44 in passage [2] details the specific data points required under this requirement.\n\n[2][3][4]",
+      "seconds": 3.34,
       "input_tokens": 1502,
-      "output_tokens": 89,
+      "output_tokens": 108,
       "done_reason": "stop"
     },
     {
@@ -187,10 +189,10 @@
         "esrs#0194",
         "taxonomy#0054"
       ],
-      "answer": "An economic activity counts as an enabling activity if it directly enables other activities to make a substantial contribution to environmental objectives, provided it does not lead to asset lock-in and has a substantial positive environmental impact based on life-cycle considerations [1]. Additionally, such an activity must not cause significant harm to any of the environmental objectives defined in Article 17 [1].",
-      "seconds": 13.49,
+      "answer": "An economic activity counts as an enabling activity if it directly enables other activities to make a substantial contribution to environmental objectives, provided it does not lead to asset lock-in and has a substantial positive environmental impact based on life-cycle considerations [1]. Additionally, such an activity must qualify under Article 3 of the Taxonomy Regulation [5].",
+      "seconds": 2.66,
       "input_tokens": 1418,
-      "output_tokens": 73,
+      "output_tokens": 67,
       "done_reason": "stop"
     },
     {
@@ -203,7 +205,7 @@
         "taxonomy#0057"
       ],
       "answer": "Based on the provided passages, non-financial undertakings must disclose the proportion of their turnover derived from products or services associated with environmentally sustainable economic activities, the proportion of their capital expenditure related to such assets or processes, and the proportion of their operating expenditure related to such assets or processes. [1], [5]",
-      "seconds": 12.82,
+      "seconds": 2.72,
       "input_tokens": 1495,
       "output_tokens": 65,
       "done_reason": "stop"
@@ -218,7 +220,7 @@
         "csrd#0030"
       ],
       "answer": "Based on the provided passages, a third-country undertaking with a net turnover of more than EUR 150 million in the Union is generally subject to Union sustainability reporting requirements [1]. However, for its subsidiary undertakings or branches, the threshold applies differently: subsidiaries must meet the large/medium-sized undertaking criteria (excluding micro undertakings) and generate over EUR 40 million in turnover, while branches specifically require a net turnover of more than EUR 40 million in the preceding financial year [1][2]. Additionally, these requirements only apply if the third-country undertaking itself generated a net turnover of more than EUR 150 million in the Union for each of the last two consecutive financial years [2].",
-      "seconds": 22.94,
+      "seconds": 3.86,
       "input_tokens": 1433,
       "output_tokens": 147,
       "done_reason": "stop"
@@ -232,10 +234,10 @@
         "csrd#0094",
         "csrd#0169"
       ],
-      "answer": "Based on the provided passages, the CSRD initially requires a **limited assurance engagement** from the statutory auditor regarding the compliance of sustainability reporting with Union requirements. This progressive approach is suggested because there is currently no commonly agreed standard for the assurance of sustainability reporting, which creates risks regarding different understandings of what a reasonable assurance engagement entails [1].",
-      "seconds": 12.6,
+      "answer": "Based on the provided passages, the CSRD initially requires a **limited assurance engagement** from the statutory auditor regarding the compliance of sustainability reporting with Union requirements. This progressive approach is suggested to start before moving toward a higher level of assurance, as there is currently no commonly agreed standard for reasonable assurance in this field [1].",
+      "seconds": 2.51,
       "input_tokens": 1301,
-      "output_tokens": 69,
+      "output_tokens": 65,
       "done_reason": "stop"
     },
     {
@@ -248,7 +250,7 @@
         "esrs#0001"
       ],
       "answer": "The Commission had to adopt the first set of sustainability reporting standards by 30 June 2023 [1][5].",
-      "seconds": 9.12,
+      "seconds": 2.22,
       "input_tokens": 1513,
       "output_tokens": 28,
       "done_reason": "stop"
@@ -263,7 +265,7 @@
         "csrd#0213"
       ],
       "answer": "The Commission must review the sustainability reporting standards at least every three years after their date of application. [1][2][3]",
-      "seconds": 9.5,
+      "seconds": 2.19,
       "input_tokens": 1500,
       "output_tokens": 27,
       "done_reason": "stop"
@@ -277,10 +279,10 @@
         "csrd#0056",
         "csrd#0052"
       ],
-      "answer": "The European Financial Reporting Advisory Group (EFRAG) provides technical advice to the Commission on sustainability reporting standards [1][2][3][4][5].",
-      "seconds": 11.71,
+      "answer": "The European Financial Reporting Advisory Group (EFRAG) provides technical advice to the Commission on sustainability reporting standards [1][2][3][4].",
+      "seconds": 2.17,
       "input_tokens": 1463,
-      "output_tokens": 32,
+      "output_tokens": 30,
       "done_reason": "stop"
     },
     {
@@ -293,7 +295,7 @@
         "esrs#0709"
       ],
       "answer": "The long-term time horizon is defined as more than 5 years [1], [3].",
-      "seconds": 9.21,
+      "seconds": 1.67,
       "input_tokens": 1412,
       "output_tokens": 20,
       "done_reason": "stop"
@@ -307,10 +309,10 @@
         "esrs#0220",
         "esrs#0188"
       ],
-      "answer": "The ESRS E1 disclosure requirement that covers a company's transition plan for climate change mitigation is **E1-1** [1][2][3][4].",
-      "seconds": 13.29,
+      "answer": "The ESRS E1 disclosure requirement that covers a company's transition plan for climate change mitigation is **E1-1** [2][3][4].",
+      "seconds": 2.23,
       "input_tokens": 1447,
-      "output_tokens": 35,
+      "output_tokens": 33,
       "done_reason": "stop"
     },
     {
@@ -323,7 +325,7 @@
         "esrs#0785"
       ],
       "answer": "Based on the provided passages, the Global Warming Potential (GWP) values used to calculate CO2-equivalent emissions of non-CO2 gases must be based on a **100-year time horizon** published by the IPCC [1].",
-      "seconds": 12.41,
+      "seconds": 2.54,
       "input_tokens": 1484,
       "output_tokens": 51,
       "done_reason": "stop"
@@ -338,7 +340,7 @@
         "csrd#0108"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 7.72,
+      "seconds": 1.88,
       "input_tokens": 1486,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -353,7 +355,7 @@
         "esrs#0196"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 5.03,
+      "seconds": 1.87,
       "input_tokens": 1485,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -368,7 +370,7 @@
         "esrs#0278"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 6.19,
+      "seconds": 1.98,
       "input_tokens": 1573,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -383,7 +385,7 @@
         "esrs#0555"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 6.08,
+      "seconds": 1.73,
       "input_tokens": 1377,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -398,7 +400,7 @@
         "esrs#0001"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 6.26,
+      "seconds": 2.1,
       "input_tokens": 1653,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -413,7 +415,7 @@
         "esrs#0167"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 5.1,
+      "seconds": 1.73,
       "input_tokens": 1366,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -428,7 +430,7 @@
         "taxonomy#0014"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 8.44,
+      "seconds": 1.68,
       "input_tokens": 1326,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -443,7 +445,7 @@
         "csrd#0065"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 11.53,
+      "seconds": 1.99,
       "input_tokens": 1579,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -458,7 +460,7 @@
         "csrd#0243"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 9.86,
+      "seconds": 1.82,
       "input_tokens": 1436,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -473,7 +475,7 @@
         "esrs#0814"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 12.88,
+      "seconds": 2.17,
       "input_tokens": 1679,
       "output_tokens": 5,
       "done_reason": "stop"

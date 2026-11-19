@@ -1,5 +1,6 @@
 {
   "model": "llama3.2:3b",
+  "tag": "r2",
   "parameter_size": "3.2B",
   "quantization": "Q4_K_M",
   "family": "llama",
@@ -9,6 +10,7 @@
     "completion",
     "tools"
   ],
+  "free_ram_before_bytes": 4628783104,
   "ollama_version": "0.40.16",
   "options": {
     "num_ctx": 8192,
@@ -20,11 +22,11 @@
     "os": "Windows-11-10.0.26300-SP0",
     "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD"
   },
-  "time_utc": "2026-11-19T02:19:37+00:00",
-  "warmup_seconds": 7.59,
+  "time_utc": "2026-11-19T21:40:25+00:00",
+  "warmup_seconds": 9.36,
   "memory_bytes": 3118863482,
   "memory_vram_bytes": 3118863482,
-  "total_seconds": 91.01,
+  "total_seconds": 91.3,
   "rows": [
     {
       "id": "q01",
@@ -36,7 +38,7 @@
         "taxonomy#0034"
       ],
       "answer": "The environmental objectives of the EU Taxonomy are climate change mitigation, climate change adaptation, the sustainable use and protection of water and marine resources, the transition to a circular economy, pollution prevention and control, and the protection and restoration of biodiversity and ecosystems. [9]",
-      "seconds": 4.0,
+      "seconds": 4.03,
       "input_tokens": 1347,
       "output_tokens": 54,
       "done_reason": "stop"
@@ -81,7 +83,7 @@
         "esrs#0111"
       ],
       "answer": "[3] and [4] undertakings should consider each materiality perspective in its own right, and should disclose information that is material from both perspectives as well as information that is material from only one perspective. (30) Article 19a(1) and Article 29a(1) of Directive 2013/34/EU require undertakings to disclose information about five reporting areas: business model; policies, including due diligence processes implemented; the outcome of those policies; risks and risk management; and key performance indicators. [4] Users need information about governance factors. Governance factors that are most relevant to users are listed by authoritative reporting frameworks such as the Global Reporting Initiative and the Task Force on Climate-related Financial Disclosures, as well as by authoritative global frameworks such as the Global Governance Principles of the International Corporate Governance Network and the G20/OECD Principles of Corporate Governance.",
-      "seconds": 4.42,
+      "seconds": 4.46,
       "input_tokens": 1369,
       "output_tokens": 182,
       "done_reason": "stop"
@@ -96,7 +98,7 @@
         "csrd#0247"
       ],
       "answer": "[2] [17] [1] (ii)",
-      "seconds": 3.62,
+      "seconds": 3.6,
       "input_tokens": 1645,
       "output_tokens": 13,
       "done_reason": "stop"
@@ -111,7 +113,7 @@
         "csrd#0076"
       ],
       "answer": "The Commission must adopt standards for reasonable assurance of sustainability reporting by no later than 1 October 2028. [2]",
-      "seconds": 2.68,
+      "seconds": 2.75,
       "input_tokens": 1305,
       "output_tokens": 26,
       "done_reason": "stop"
@@ -126,7 +128,7 @@
         "esrs#0056"
       ],
       "answer": "The management report with the sustainability statement has to be prepared in the electronic reporting format specified in Article 3 of Commission Delegated Regulation (EU) 2019/815 [2].",
-      "seconds": 3.03,
+      "seconds": 3.02,
       "input_tokens": 1394,
       "output_tokens": 39,
       "done_reason": "stop"
@@ -141,7 +143,7 @@
         "esrs#0709"
       ],
       "answer": "The medium-term time horizon is from the end of the short-term reporting period defined in (a) up to 5 years. [77]",
-      "seconds": 2.96,
+      "seconds": 2.93,
       "input_tokens": 1395,
       "output_tokens": 30,
       "done_reason": "stop"
@@ -156,7 +158,7 @@
         "esrs#0074"
       ],
       "answer": "A company must always disclose the information required by ESRS 2 General Disclosures, including the Disclosure Requirements and data points specified in ESRS 2, and the Disclosure Requirements in topical ESRS related to the Disclosure Requirement IRO-1 [29].",
-      "seconds": 3.32,
+      "seconds": 3.28,
       "input_tokens": 1433,
       "output_tokens": 52,
       "done_reason": "stop"
@@ -171,7 +173,7 @@
         "esrs#0209"
       ],
       "answer": "[1]",
-      "seconds": 3.0,
+      "seconds": 2.96,
       "input_tokens": 1485,
       "output_tokens": 4,
       "done_reason": "stop"
@@ -186,7 +188,7 @@
         "taxonomy#0054"
       ],
       "answer": "An economic activity shall qualify as contributing substantially to one or more of the environmental objectives set out in Article 9 by directly enabling other activities to make a substantial contribution to one or more of those objectives, provided that such economic activity: (a) does not lead to a lock-in of assets that undermine long-term environmental goals, considering the economic lifetime of those assets; and (b) has a substantial positive environmental impact, on the basis of life-cycle considerations. [1]",
-      "seconds": 3.69,
+      "seconds": 3.63,
       "input_tokens": 1391,
       "output_tokens": 96,
       "done_reason": "stop"
@@ -201,7 +203,7 @@
         "taxonomy#0057"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 2.91,
+      "seconds": 2.87,
       "input_tokens": 1448,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -216,7 +218,7 @@
         "csrd#0030"
       ],
       "answer": "A third-country undertaking which generates a net turnover of more than EUR 150 million in the Union should be subject to Union sustainability reporting requirements. [1]",
-      "seconds": 3.03,
+      "seconds": 3.0,
       "input_tokens": 1403,
       "output_tokens": 32,
       "done_reason": "stop"
@@ -231,7 +233,7 @@
         "csrd#0169"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 2.54,
+      "seconds": 2.41,
       "input_tokens": 1283,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -246,7 +248,7 @@
         "esrs#0001"
       ],
       "answer": "The Commission had to adopt the first set of sustainability reporting standards by 30 June 2023 [54].",
-      "seconds": 3.12,
+      "seconds": 3.04,
       "input_tokens": 1442,
       "output_tokens": 23,
       "done_reason": "stop"
@@ -261,7 +263,7 @@
         "csrd#0213"
       ],
       "answer": "The Commission shall review the sustainability reporting standards, including the sustainability reporting standards for small and medium-sized undertakings, every three years to take account of relevant developments, including the development of international standards. [2, 3]",
-      "seconds": 3.09,
+      "seconds": 2.93,
       "input_tokens": 1427,
       "output_tokens": 47,
       "done_reason": "stop"
@@ -276,7 +278,7 @@
         "csrd#0052"
       ],
       "answer": "The European Financial Reporting Advisory Group (EFRAG) gives the Commission technical advice on the sustainability reporting standards. [2]",
-      "seconds": 2.99,
+      "seconds": 3.01,
       "input_tokens": 1415,
       "output_tokens": 25,
       "done_reason": "stop"
@@ -291,7 +293,7 @@
         "esrs#0709"
       ],
       "answer": "The long-term time horizon is more than 5 years. [77]",
-      "seconds": 1.59,
+      "seconds": 1.86,
       "input_tokens": 1395,
       "output_tokens": 16,
       "done_reason": "stop"
@@ -306,7 +308,7 @@
         "esrs#0188"
       ],
       "answer": "[1]",
-      "seconds": 2.81,
+      "seconds": 2.85,
       "input_tokens": 1443,
       "output_tokens": 4,
       "done_reason": "stop"
@@ -321,7 +323,7 @@
         "esrs#0785"
       ],
       "answer": "[2]",
-      "seconds": 2.95,
+      "seconds": 2.98,
       "input_tokens": 1475,
       "output_tokens": 4,
       "done_reason": "stop"
@@ -336,7 +338,7 @@
         "csrd#0108"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 2.76,
+      "seconds": 2.81,
       "input_tokens": 1418,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -351,7 +353,7 @@
         "esrs#0196"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 2.98,
+      "seconds": 3.01,
       "input_tokens": 1485,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -366,7 +368,7 @@
         "esrs#0278"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 3.09,
+      "seconds": 3.23,
       "input_tokens": 1516,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -381,7 +383,7 @@
         "esrs#0555"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 2.58,
+      "seconds": 2.67,
       "input_tokens": 1340,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -396,7 +398,7 @@
         "esrs#0001"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 3.14,
+      "seconds": 3.17,
       "input_tokens": 1530,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -411,7 +413,7 @@
         "esrs#0167"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 2.64,
+      "seconds": 2.79,
       "input_tokens": 1348,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -426,7 +428,7 @@
         "taxonomy#0014"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 2.41,
+      "seconds": 2.65,
       "input_tokens": 1299,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -441,7 +443,7 @@
         "csrd#0065"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 3.09,
+      "seconds": 3.11,
       "input_tokens": 1509,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -456,7 +458,7 @@
         "csrd#0243"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 3.05,
+      "seconds": 2.68,
       "input_tokens": 1392,
       "output_tokens": 5,
       "done_reason": "stop"
@@ -471,7 +473,7 @@
         "esrs#0814"
       ],
       "answer": "NOT IN SOURCES",
-      "seconds": 3.38,
+      "seconds": 3.43,
       "input_tokens": 1607,
       "output_tokens": 5,
       "done_reason": "stop"

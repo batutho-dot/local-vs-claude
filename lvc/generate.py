@@ -88,13 +88,78 @@ def chat(model: str, user: str, thinking: bool) -> dict:
     }
 
 
-def main(model: str) -> None:
+RAM_MARGIN_BYTES = 3_000_000_000  # free RAM needed beyond the model's own memory before it may load
+
+
+def free_ram_bytes() -> int | None:
+    """Free physical memory, from Windows (GlobalMemoryStatusEx) or /proc/meminfo; None if unknown."""
+    if platform.system() == "Windows":
+        import ctypes
+
+        class MemStatus(ctypes.Structure):
+            _fields_ = [("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                        ("ullTotalPhys", ctypes.c_ulonglong), ("ullAvailPhys", ctypes.c_ulonglong),
+                        ("ullTotalPageFile", ctypes.c_ulonglong), ("ullAvailPageFile", ctypes.c_ulonglong),
+                        ("ullTotalVirtual", ctypes.c_ulonglong), ("ullAvailVirtual", ctypes.c_ulonglong),
+                        ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
+
+        m = MemStatus()
+        m.dwLength = ctypes.sizeof(MemStatus)
+        ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(m))
+        return m.ullAvailPhys
+    try:
+        for line in open("/proc/meminfo"):
+            if line.startswith("MemAvailable:"):
+                return int(line.split()[1]) * 1024
+    except OSError:
+        pass
+    return None
+
+
+def preflight(model: str, file_bytes: int | None) -> dict:
+    """One model at a time: refuse to load if another model is loaded or RAM is short."""
+    loaded = [m["name"] for m in call("/api/ps")["models"]]
+    if loaded:
+        raise SystemExit(f"another model is loaded ({loaded}); unload it first, nothing run")
+    free = free_ram_bytes()
+    need = model_bytes(model) + RAM_MARGIN_BYTES
+    if free is not None and free < need:
+        raise SystemExit(f"only {free / 1e9:.1f} GB RAM free, need {need / 1e9:.1f} GB for {model}; nothing run")
+    return {"free_ram_before_bytes": free}
+
+
+def model_bytes(model: str) -> int:
+    """Memory the model needs: the largest a saved run measured, else its file size."""
+    measured = [json.loads(p.read_text(encoding="utf-8")).get("memory_bytes") or 0
+                for p in RUNS.glob(model.replace(":", "_").replace("/", "_") + "_*.json")]
+    return max(measured + [model_info(model)["file_bytes"] or 0])
+
+
+def wait_for_ram(model: str, minutes: int = 180) -> bool:
+    """Wait until free RAM covers the model's memory plus the margin, rechecking every
+    3 minutes. False after `minutes`."""
+    need = model_bytes(model) + RAM_MARGIN_BYTES
+    for _ in range(0, minutes, 3):
+        free = free_ram_bytes()
+        if free is None or free >= need:
+            return True
+        print(f"  waiting for RAM: {free / 1e9:.1f} GB free, {need / 1e9:.1f} GB needed for {model}", flush=True)
+        time.sleep(180)
+    return False
+
+
+def unload(model: str) -> None:
+    call("/api/generate", {"model": model, "keep_alive": 0})
+
+
+def main(model: str, tag: str = "r1") -> None:
     ref = json.loads(REFERENCE.read_text(encoding="utf-8"))
     chunks = {c.id: c.text for c in load_chunks(DATA_TEXT)}
     questions = {q["id"]: q for q in json.loads(TESTSET.read_text(encoding="utf-8"))}
     info = model_info(model)
     thinking = "thinking" in info["capabilities"]
     version = call("/api/version")["version"]
+    pre = preflight(model, info["file_bytes"])
 
     # Warm-up: load the model into memory first, so load time is reported apart from answer time.
     t = time.perf_counter()
@@ -112,9 +177,12 @@ def main(model: str) -> None:
 
     loaded = [m for m in call("/api/ps")["models"] if m["name"] == model or m["model"] == model]
     mem = loaded[0] if loaded else {}
+    unload(model)
     run = {
         "model": model,
+        "tag": tag,
         **info,
+        **pre,
         "ollama_version": version,
         "options": {"num_ctx": NUM_CTX, "temperature": TEMPERATURE, "num_predict": NUM_PREDICT,
                     "think": False if thinking else None},
@@ -127,7 +195,7 @@ def main(model: str) -> None:
         "rows": rows,
     }
     RUNS.mkdir(exist_ok=True)
-    out = RUNS / (model.replace(":", "_").replace("/", "_") + ".json")
+    out = RUNS / (model.replace(":", "_").replace("/", "_") + f"_{tag}.json")
     out.write_text(json.dumps(run, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"{model}: {len(rows)} answers in {run['total_seconds']} s, memory "
           f"{(run['memory_bytes'] or 0) / 1e9:.2f} GB ({(run['memory_vram_bytes'] or 0) / 1e9:.2f} GB on GPU) -> {out.name}")

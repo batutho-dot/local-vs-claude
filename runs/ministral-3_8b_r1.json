@@ -1,5 +1,6 @@
 {
   "model": "ministral-3:8b",
+  "tag": "r1",
   "parameter_size": "8.9B",
   "quantization": "Q4_K_M",
   "family": "mistral3",
@@ -478,4 +479,4 @@
       "done_reason": "stop"
     }
   ]
-}
+}

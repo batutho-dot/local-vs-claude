@@ -1,11 +1,103 @@
 {
-  "_note": "Scores of the saved runs, measured 2026-11-19 with rag-eval's rule-based scorer. verify.py fails if a change moves them; update this file only on purpose, with the reason in the commit.",
+  "_note": "Scores per saved run file (reference = rag-eval's Haiku run), measured with rag-eval's rule-based scorer. verify.py fails if a change moves them or a run file is missing from this list; add new runs here on purpose, with the reason in the commit.",
   "chunks": 1257,
   "scores": {
-    "claude-haiku-5-5": {"found": 17, "right": 20, "declined": 10, "wrong": []},
-    "llama3.2:3b": {"found": 17, "right": 13, "declined": 10, "wrong": ["q04", "q05", "q10", "q12", "q14", "q19", "q20"]},
-    "qwen3.5:4b": {"found": 17, "right": 20, "declined": 10, "wrong": []},
-    "ministral-3:8b": {"found": 17, "right": 20, "declined": 10, "wrong": []}
+    "reference/haiku_hybrid.json": {
+      "found": 17,
+      "right": 20,
+      "declined": 10,
+      "wrong": []
+    },
+    "runs/claude-haiku-5-5_r2.json": {
+      "found": 17,
+      "right": 20,
+      "declined": 10,
+      "wrong": []
+    },
+    "runs/claude-haiku-5-5_r3.json": {
+      "found": 17,
+      "right": 20,
+      "declined": 10,
+      "wrong": []
+    },
+    "runs/llama3.2_3b_r1.json": {
+      "found": 17,
+      "right": 13,
+      "declined": 10,
+      "wrong": [
+        "q04",
+        "q05",
+        "q10",
+        "q12",
+        "q14",
+        "q19",
+        "q20"
+      ]
+    },
+    "runs/qwen3.5_4b_r1.json": {
+      "found": 17,
+      "right": 20,
+      "declined": 10,
+      "wrong": []
+    },
+    "runs/ministral-3_8b_r1.json": {
+      "found": 17,
+      "right": 20,
+      "declined": 10,
+      "wrong": []
+    },
+    "runs/llama3.2_3b_r2.json": {
+      "found": 17,
+      "right": 13,
+      "declined": 10,
+      "wrong": [
+        "q04",
+        "q05",
+        "q10",
+        "q12",
+        "q14",
+        "q19",
+        "q20"
+      ]
+    },
+    "runs/llama3.2_3b_r3.json": {
+      "found": 17,
+      "right": 13,
+      "declined": 10,
+      "wrong": [
+        "q04",
+        "q05",
+        "q10",
+        "q12",
+        "q14",
+        "q19",
+        "q20"
+      ]
+    },
+    "runs/qwen3.5_4b_r2.json": {
+      "found": 17,
+      "right": 20,
+      "declined": 10,
+      "wrong": []
+    },
+    "runs/qwen3.5_4b_r3.json": {
+      "found": 17,
+      "right": 20,
+      "declined": 10,
+      "wrong": []
+    },
+    "runs/ministral-3_8b_r2.json": {
+      "found": 17,
+      "right": 20,
+      "declined": 10,
+      "wrong": []
+    },
+    "runs/ministral-3_8b_r3.json": {
+      "found": 17,
+      "right": 20,
+      "declined": 10,
+      "wrong": []
+    }
   },
   "full_model": "llama3.2:3b"
 }
