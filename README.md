@@ -88,6 +88,10 @@ python run.py                         # the table, with every run in runs/
 `python -m lvc.check_retrieval` reruns the hybrid search and checks the passages match the
 saved Claude run (needs `pip install fastembed==0.9.1`; result on 2026-11-19: 30 / 30 match).
 
+`python verify.py` checks the code after a change in about 2 seconds without any model
+(`--full` adds a real `llama3.2:3b` rerun and the retrieval check, about 3.5 minutes). What
+each check covers is in `verify-features/`.
+
 ## How a run works
 
 | Step | What happens |
