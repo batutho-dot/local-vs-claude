@@ -92,6 +92,31 @@ saved Claude run (needs `pip install fastembed==0.9.1`; result on 2026-11-19: 30
 (`--full` adds a real `llama3.2:3b` rerun and the retrieval check, about 3.5 minutes). What
 each check covers is in `verify-features/`.
 
+## How it is built
+
+Every question gets the same five passages that Claude got, only the model that writes the
+answer changes, and one script scores all answers the same way.
+
+```mermaid
+flowchart LR
+    Q["Question<br/><i>testset.json, 30 items</i>"]
+    R["Fixed retrieval<br/><i>5 chunk ids saved<br/>from the Claude run</i>"]
+    P["Prompt<br/><i>rag-eval's system prompt,<br/>numbered passages</i>"]
+    M{"Model switch"}
+    L["Local model via Ollama<br/><i>llama3.2:3b, qwen3.5:4b,<br/>ministral-3:8b, temperature 0</i>"]
+    H["Claude Haiku 5.5<br/><i>saved answers,<br/>reference only</i>"]
+    S["Scorer<br/><i>passage found, required terms,<br/>NOT IN SOURCES</i>"]
+    T["Results table<br/><i>three scores, seconds, memory</i>"]
+
+    Q --> R --> P --> M
+    M -->|"local"| L --> S
+    M -->|"reference"| H --> S
+    S --> T
+```
+
+The structure diagram and a table tying each box to its file and line are in
+[`docs/architecture.md`](docs/architecture.md).
+
 ## How a run works
 
 | Step | What happens |
